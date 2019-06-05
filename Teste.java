@@ -16,19 +16,25 @@ import java.awt.Color;
 
 public class Teste extends JFrame {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtDigiteOCpf;
 	private JLabel lblVerificadorDeCpf;
 	private JLabel lblIsvalid;
 	private JTextField lblCPF;
 	private JButton btnLimpar;
-	VerificaCPF verificaCPF = new VerificaCPF();
-
+	private VerificaCPF verificaCPF = new VerificaCPF();
+	private GeradorCPF geradorCPF = new GeradorCPF();
+	
+	/*
+	 * My method actions
+	 */
 	private void checacpf(String cpf) {
+		if (cpf.equals("")) {
+			System.out.println(cpf.length());
+			this.lblIsvalid.setText("Digite um CPF!");
+		}else if (cpf.length() < 10) {
+			this.lblIsvalid.setText("CPF incompleto");
+		} 
 		verificaCPF.setCpf(cpf);
 		if (verificaCPF.cpfIsValid()){
 			this.lblIsvalid.setText("Válido");			
@@ -39,7 +45,7 @@ public class Teste extends JFrame {
 	}
 	
 	private void gerarcpf() {
-		String newCPF = verificaCPF.gerarcpf();
+		String newCPF = geradorCPF.gerarcpf();
 		this.lblCPF.setText(newCPF);
 	}
 	
@@ -72,7 +78,7 @@ public class Teste extends JFrame {
 		setResizable(false);
 		setTitle("Verificador de CPF");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 528, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -85,33 +91,34 @@ public class Teste extends JFrame {
 		txtDigiteOCpf = new JTextField();
 		txtDigiteOCpf.setForeground(Color.BLUE);
 		txtDigiteOCpf.setHorizontalAlignment(SwingConstants.CENTER);
-		txtDigiteOCpf.setBounds(131, 48, 177, 26);
+		txtDigiteOCpf.setBounds(166, 52, 177, 26);
 		panel.add(txtDigiteOCpf);
 		txtDigiteOCpf.setColumns(10);
+		
 		
 		JButton btnNewButton = new JButton("Verificar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String cpf = txtDigiteOCpf.getText();
-
 				checacpf(cpf);
 			}
 
 
 		});
-		btnNewButton.setBounds(103, 104, 117, 29);
+		
+		btnNewButton.setBounds(138, 104, 117, 29);
 		panel.add(btnNewButton);
 		
 		lblVerificadorDeCpf = new JLabel("Verificador de CPF");
 		lblVerificadorDeCpf.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-		lblVerificadorDeCpf.setBounds(145, 6, 144, 20);
+		lblVerificadorDeCpf.setBounds(180, 6, 144, 20);
 		panel.add(lblVerificadorDeCpf);
 		
 		lblIsvalid = new JLabel("");
 		lblIsvalid.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
 		lblIsvalid.setForeground(new Color(0, 0, 139));
 		lblIsvalid.setHorizontalAlignment(SwingConstants.CENTER);
-		lblIsvalid.setBounds(320, 52, 103, 16);
+		lblIsvalid.setBounds(355, 52, 132, 16);
 		panel.add(lblIsvalid);
 		
 		JButton btnGerarCpf = new JButton("Gerar CPF");
@@ -120,13 +127,16 @@ public class Teste extends JFrame {
 				gerarcpf();
 			}
 		});
-		btnGerarCpf.setBounds(247, 175, 117, 29);
+		btnGerarCpf.setBounds(282, 175, 117, 29);
 		panel.add(btnGerarCpf);
 		
 		lblCPF = new JTextField("CPF");
+		lblCPF.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
 		lblCPF.setForeground(Color.RED);
 		lblCPF.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCPF.setBounds(58, 180, 177, 16);
+		lblCPF.setBounds(93, 180, 177, 20);
+		
+		
 		panel.add(lblCPF);
 		
 		btnLimpar = new JButton("Limpar");
@@ -135,7 +145,7 @@ public class Teste extends JFrame {
 				limpar();
 			}
 		});
-		btnLimpar.setBounds(232, 104, 117, 29);
+		btnLimpar.setBounds(256, 104, 117, 29);
 		panel.add(btnLimpar);
 	}
 }
