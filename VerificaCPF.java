@@ -44,26 +44,30 @@ public class VerificaCPF {
 	}
 	
 	public boolean cpfIsValid() {
-		if (cpf.equals("00000000000") ||
-		    cpf.equals("11111111111") ||
-			cpf.equals("22222222222") ||
-			cpf.equals("33333333333") ||
-			cpf.equals("44444444444") ||
-			cpf.equals("55555555555") ||
-			cpf.equals("66666666666") ||
-			cpf.equals("77777777777") ||
-			cpf.equals("88888888888") ||
-			cpf.equals("99999999999") 
-			){
-			System.out.println("Não existe CPF com todos os números iguais válido: " + cpf);
-			return false;
-		}else {
-			
-			if  (Character.getNumericValue(cpf.charAt(9)) == primeirodigito() && Character.getNumericValue(cpf.charAt(10))  == segundodigito()) {
-				return true;
-			}else {
+		
+		try {
+			if (cpf.equals("00000000000") ||
+					cpf.equals("11111111111") ||
+					cpf.equals("22222222222") ||
+					cpf.equals("33333333333") ||
+					cpf.equals("44444444444") ||
+					cpf.equals("55555555555") ||
+					cpf.equals("66666666666") ||
+					cpf.equals("77777777777") ||
+					cpf.equals("88888888888") ||
+					cpf.equals("99999999999") 
+					){
+				System.out.println("Não existe CPF com todos os números iguais válido: " + cpf);
 				return false;
-			}
+			} else {
+				
+				if  (Character.getNumericValue(cpf.charAt(9)) == primeirodigito() && Character.getNumericValue(cpf.charAt(10))  == segundodigito()) {
+					return true;
+				}
+			}	
+		} catch (Exception e) {
+			System.out.println(e);
 		}
+		return false;
 	}
 }

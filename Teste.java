@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.Color;
 
+@SuppressWarnings("serial")
 public class Teste extends JFrame {
 
 	private JPanel contentPane;
@@ -29,8 +30,10 @@ public class Teste extends JFrame {
 	 * My method actions
 	 */
 	private void checacpf(String cpf) {
+		
+
 		if (cpf.equals("")) {
-			System.out.println(cpf.length());
+			//System.out.println(cpf.length());
 			this.lblIsvalid.setText("Digite um CPF!");
 		}else if (cpf.length() < 10) {
 			this.lblIsvalid.setText("CPF incompleto");
